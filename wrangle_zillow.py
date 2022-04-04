@@ -119,4 +119,19 @@ def impute_missing_values(df, columns_strategy):
         test[columns] = imputer.transform(test[columns])
     
     return train, validate, test
+
+
+
+def prepare_zillow(df):
+    '''Prepare zillow for data exploration.'''
+    df = get_single_units(df)
+    df = handle_missing_values(df)
+    train, validate, test = impute_missing_values(df, columns_strategy)
+    return train, validate, test
+    
+def wrangle_zillow():
+    '''Acquire and prepare data from Zillow database for explore'''
+    train, validate, test = prepare_zillow(acquire())
+    
+    return train, validate, test
     
